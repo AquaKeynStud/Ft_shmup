@@ -6,7 +6,7 @@ EnemyBullet enemy_bullets[NUM_ENEMY_BULLETS];
 // Initialisation des tirs ennemis
 void init_enemy_bullets() {
     for (int i = 0; i < NUM_ENEMY_BULLETS; i++) {
-        enemy_bullets[i].active = 0;
+        enemy_bullets[i].active = 1;
     }
 }
 
@@ -14,8 +14,8 @@ void init_enemy_bullets() {
 void fire_enemy_bullet(int enemy_index) {
     for (int i = 0; i < NUM_ENEMY_BULLETS; i++) {
         if (!enemy_bullets[i].active) {
-            enemy_bullets[i].x = enemy_index; // Position X de l'ennemi
-            enemy_bullets[i].y = rand() % LINES; // Position Y aléatoire de l'ennemi
+            enemy_bullets[i].x = Enemy[i].x + 1; // Position X de l'ennemi
+            enemy_bullets[i].y = Enemy[i].y; // Position Y aléatoire de l'ennemi
             enemy_bullets[i].active = 1;
             break;
         }

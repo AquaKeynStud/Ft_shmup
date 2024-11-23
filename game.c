@@ -2,10 +2,12 @@
 
 int score = 0;
 int game_over = 0;
+int life = 3;
 
 void init_game() {
     init_enemies();
     init_bullets();
+  //  init_enemy_bullets();
 }
 
 int is_game_over() {
@@ -17,9 +19,7 @@ void check_collisions() {
     while (i < NUM_ENEMIES) {
         if (enemies[i].x == player_x && enemies[i].y == player_y) {
             game_over = 1;
-        } // si le joueur rentre en colision avec un ennemi, le jeu s'arrete
-        
-	fire_enemy_bullet(enemies[i].x);
+        } // si le joueur rentre en colision avec un ennemi, le jeu s'arrete 
         int j = 0;
         while (j < NUM_BULLETS) {
             if (bullets[j].active && bullets[j].x == enemies[i].x && bullets[j].y == enemies[i].y) {
@@ -33,6 +33,20 @@ void check_collisions() {
     }
 }
 
+/*void	check_collisions_enemy_bullets()
+{
+	int i = 0;
+
+	while(i < NUM_ENEMY_BULLETS)
+	{
+		if (EnemyBullet[j].x == player_x && EnemyBullet[j].y == player_y)
+			life-= 1;
+		fire_enemy_bullet(enemies[i].x);
+		i++;
+	}
+
+}*/
+
 void handle_input(int ch) {
     move_player(ch);
     if (ch == ' ') fire_bullet();
@@ -45,7 +59,7 @@ void update_game() {
     move_enemies();
    move_enemy_bullets(); //fait apparaitre les tirs enemies
     check_collisions();
-
+//    check_collisions_enemy_bullets();
     // Faire apparaître un ennemi toutes les X itérations
     spawn_counter++;
     if (spawn_counter >= 20) { // limite le nombre d'apparition d'ennemis a 20
