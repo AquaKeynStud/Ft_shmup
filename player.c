@@ -1,6 +1,6 @@
 #include "player.h"
 
-int player_x = 10, player_y = 10; //position depart du joueur
+int player_x = 100, player_y = 15; //position depart du joueur
 
 void display_player() {
     mvaddch(player_y, player_x, 'b');

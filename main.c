@@ -14,20 +14,30 @@ int main() {
     keypad(stdscr, TRUE);
     curs_set(0);
     srand(time(NULL));
+
 	printw("press any key to start the game");
 	refresh();
+
+	getch();
     init_game();
 
+	timeout(0);
     int ch;
-    while ((ch = getch()) != 'q') {
-        if (is_game_over()) break;
 
-        clear();
-        handle_input(ch);
-        update_game();
-        draw_game();
+    while (1) {
+        if (is_game_over()) break;
+		ch = getch();
+		if (ch == 'q') break;
+
+		if (ch != ERR) handle_input(ch);
+
+		update_game();
+
+		clear();
+		draw_game();
         refresh();
-        napms(200);
+		
+        napms(100);
     }
 
     endwin();

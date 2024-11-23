@@ -1,4 +1,6 @@
 #include "enemy.h"
+#include "enemy_bullets.h"
+#include "player.h"
 
 Enemy enemies[NUM_ENEMIES]; //constante nombre d'ennemis max a l'ecran
 
@@ -31,6 +33,10 @@ void move_enemies() {
             if (enemies[i].x < 0) { // Ennemi sorti de l'écran
                 enemies[i].x = -1; // Désactiver l'ennemi
             }
+			else {
+				if (enemies[i].x <= player_x + 50)
+					fire_enemy_bullet(i);
+				}
         }
         i++;
     }

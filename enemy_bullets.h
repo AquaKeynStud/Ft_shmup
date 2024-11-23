@@ -16,7 +16,7 @@ extern EnemyBullet enemy_bullets[NUM_ENEMY_BULLETS];
 
 // Déclaration des fonctions
 void init_enemy_bullets();
-void fire_enemy_bullet(int enemy_index);
+void fire_enemy_bullet();
 void move_enemy_bullets();
 void display_enemy_bullets();
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bullet.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hadia <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: arocca <arocca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 14:02:15 by hadia             #+#    #+#             */
-/*   Updated: 2024/11/23 14:10:08 by hadia            ###   ########.fr       */
+/*   Updated: 2024/11/23 15:38:22 by arocca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 Bullet bullets[NUM_BULLETS];//constante nombre de tir max
 
-void init_bullets() 
+void init_bullets()
 {
 
     int i = 0;
