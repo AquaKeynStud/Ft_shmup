@@ -3,7 +3,7 @@
 int player_x = 100, player_y = 15; //position depart du joueur
 
 void display_player() {
-    mvaddch(player_y, player_x, 'b');
+    mvaddch(player_y, player_x, 'H');
 }  //apparition du joueur a la position initial 
 
 void move_player(int ch) {

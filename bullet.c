@@ -6,7 +6,7 @@
 /*   By: arocca <arocca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 14:02:15 by hadia             #+#    #+#             */
-/*   Updated: 2024/11/23 15:38:22 by arocca           ###   ########.fr       */
+/*   Updated: 2024/11/23 18:04:30 by arocca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ void move_bullets()
 }
 
 //fonction pour l'apparance des tirs
-void display_bullets() 
+void display_bullets()
 {
     int i = 0;
     while (i < NUM_BULLETS) {
         if (bullets[i].active) {
-            mvaddch(bullets[i].y, bullets[i].x, '|');
+            mvaddch(bullets[i].y, bullets[i].x, '-');
         }
         i++;
     }

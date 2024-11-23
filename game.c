@@ -8,6 +8,7 @@ void init_game() {
     init_enemies();
     init_bullets();
 	init_enemy_bullets();
+	init_background();
 }
 
 int is_game_over() {
@@ -48,6 +49,14 @@ void handle_input(int ch) {
 
 void update_game() {
     static int spawn_counter = 0;
+	int gen = 0;
+
+	gen += 1;
+	if (gen % 5 == 0)
+	{
+		init_background();
+		gen = 0;
+	}
 
     move_bullets();
     move_enemies();

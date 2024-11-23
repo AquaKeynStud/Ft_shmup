@@ -12,6 +12,7 @@ int is_game_over();
 void handle_input(int ch);
 void update_game();
 void draw_game();
+void init_background();
 
 #endif // GAME_H
 
