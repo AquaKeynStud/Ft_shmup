@@ -4,8 +4,12 @@ int score = 0;
 int live = 3;
 int game_over = 0;
 int you_win = 0;
-int sec = 0;
 int games = 0;
+
+int sec = 0;
+int hours;
+int minutes;
+int sseconds;
 
 void init_game() {
     init_enemies();
@@ -15,8 +19,13 @@ void init_game() {
 	init_background();
 }
 
-void increase_time(int seconds) {
-	sec += seconds;
+void increase_time(int seconds)
+{
+        hours = sec / 3600;         // Calculer les heures
+        minutes = (sec % 3600) / 60; // Calculer les minutes
+        sseconds = sec % 60;
+
+        sec += seconds;
 }
 
 int is_game_over() {
@@ -122,6 +131,6 @@ void draw_game() {
 	display_asteroids();
     mvprintw(0, 0, "Score: %d", score); // fait apparaitre le score en haut de l'ecran
 	mvprintw(0, 50, "Lives: %d", live); // fait apparaitre la vie en haut au milieu
-	mvprintw(0, 100, "Time: %d", sec); // Fait apparître le temps depuis le début de la partie en secondes
+	mvprintw(0, 100, "Time: %02d:%02d:%02d", hours, minutes, sseconds);
 	mvprintw(0, 150, "Replayed: %d times", games); // Fait apparître le nombre de fois que le joueur a restart
 }
