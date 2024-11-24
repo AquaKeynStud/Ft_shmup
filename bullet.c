@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   bullet.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: arocca <arocca@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/23 14:02:15 by hadia             #+#    #+#             */
-/*   Updated: 2024/11/24 17:29:03 by arocca           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "bullet.h" 
 
-Bullet bullets[NUM_BULLETS];//constante nombre de tir max
+Bullet bullets[NUM_BULLETS];
 
 void init_bullets()
 {
@@ -22,7 +10,7 @@ void init_bullets()
         bullets[i].active = 0;
         i++;
     }
-} //les tirs sont inactifs au depart
+}
 
 void fire_bullet() 
 {
@@ -36,9 +24,8 @@ void fire_bullet()
         }
         i++;
     }
-}//fait apparaitre les tirs a la position du player +1, soit juste devant lui
+}
 
-//fonction qui fait avancer les tirs, mais les tirs ne sortent pas de l'ecran
 void move_bullets() 
 {
     int i = 0;
@@ -53,7 +40,6 @@ void move_bullets()
     }
 }
 
-//fonction pour l'apparance des tirs
 void display_bullets()
 {
     int i = 0;

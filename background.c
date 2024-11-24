@@ -8,8 +8,8 @@ void	init_background()
 {
 	int i = 0;
     while (i < NUM_STARS) {
-		stars[i].x = rand() % COLS;  // Choisir une colonne aléatoire
-        stars[i].y = rand() % LINES; // Choisir une ligne aléatoire
+		stars[i].x = rand() % COLS; 
+        stars[i].y = rand() % LINES;
         i++;
     }
 }
@@ -22,7 +22,7 @@ void	move_background()
             stars[i].x -= 1;
 			if (stars[i].x <= 0) {
 				stars[i].x = COLS;
-        		stars[i].y = rand() % LINES; // Choisir une ligne aléatoire
+        		stars[i].y = rand() % LINES;
 			} 
         }
         i++;
@@ -32,7 +32,7 @@ void	move_background()
 void display_background() {
 	int i = 0;
     while (i < NUM_STARS) {
-        if (stars[i].x >= 0) { //actif
+        if (stars[i].x >= 0) {
             mvaddch(stars[i].y, stars[i].x, '.');
         }
         i++;

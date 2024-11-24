@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hadia <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/24 19:04:12 by hadia             #+#    #+#             */
+/*   Updated: 2024/11/24 19:07:19 by hadia            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "game.h"
 
 int score = 0;
@@ -21,8 +33,8 @@ void init_game() {
 
 void increase_time(int seconds)
 {
-        hours = sec / 3600;         // Calculer les heures
-        minutes = (sec % 3600) / 60; // Calculer les minutes
+        hours = sec / 3600;        
+        minutes = (sec % 3600) / 60;
         sseconds = sec % 60;
 
         sec += seconds;
@@ -100,7 +112,7 @@ void check_collisions_asteroid() {
 void handle_input(int ch) {
     move_player(ch);
     if (ch == ' ') fire_bullet();
-} // espace actionne un tir
+}
 
 void update_game() {
     static int spawn_counter = 0;
@@ -114,7 +126,6 @@ void update_game() {
 	check_player_pos();
 	if (live <= 0) game_over = 1;
 	else if (score >= 100) you_win = 1;
-    // Faire apparaître un ennemi toutes les X itérations
     spawn_counter++;
     if (spawn_counter >= 20) { // limite le nombre d'apparition d'ennemis a 20
         spawn_enemy();
@@ -125,14 +136,15 @@ void update_game() {
 
 void draw_game() {
 	display_background();
-    display_player();
-    display_bullets();
-    display_enemies(); //fait apparaitre le joueur, les ennemis, et les tirs a leur position initial
-	display_enemy_bullets(); //fait apparaitre les tirs enemis
+       	display_player();
+	display_bullets();
+	display_enemies(); 
+	display_enemy_bullets();
 	display_asteroids();
-    mvprintw(0, 0, "Score: %d", score); // fait apparaitre le score en haut de l'ecran
-	mvprintw(0, 50, "Lives: %d", live); // fait apparaitre la vie en haut au milieu
+       
+	mvprintw(0, 0, "Score: %d", score); 
+	mvprintw(0, 50, "Lives: %d", live); 
 	mvprintw(0, 100, "Time: %02d:%02d:%02d", hours, minutes, sseconds);
-	mvprintw(0, 150, "Replayed: %d times", games); // Fait apparître le nombre de fois que le joueur a restart
-	mvprintw(0, 200, "Player position: x:%d y:%d", player_x, player_y); // Fait apparître le nombre de fois que le joueur a restart
+	mvprintw(0, 150, "Replayed: %d times", games); 
+	mvprintw(0, 200, "Player position: x:%d y:%d", player_x, player_y);
 }
