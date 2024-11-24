@@ -45,13 +45,11 @@ void	check_player_pos(){
 
 void check_collisions() {
     int i = 0;
-	int j = 0;
     while (i < NUM_ENEMIES) {
         if (enemies[i].x == player_x && enemies[i].y == player_y) {
-            game_over = 1;
+            live -= 1;
     	} // si le joueur rentre en colision avec un ennemi, le jeu s'arrete
-	i++;
-    }
+	int j = 0;
 	while (j < NUM_BULLETS) {
 	    if (bullets[j].active && (((bullets[j].x == enemies[i].x) || (bullets[j].x == enemies[i].x + 1)) && bullets[j].y == enemies[i].y)) {
 	        enemies[i].x = -1;
@@ -59,25 +57,35 @@ void check_collisions() {
 	        score += 10;
 	    	} // si un des tirs du joueurs touche un ennemis, le score augmemte de 10
 	    j++;
-	}
-	i = 0;
-	while (i < NUM_ENEMY_BULLETS) {
-	    if (enemy_bullets[i].active && (((enemy_bullets[i].x == player_x) || (enemy_bullets[i].x == player_x - 1)) && enemy_bullets[i].y == player_y)) {
-	        enemy_bullets[i].active = 0;
-			enemy_bullets[i].x = -1;
+		}
+	int k = 0;
+	while (k < NUM_ENEMY_BULLETS) {
+	    if (enemy_bullets[k].active && (((enemy_bullets[k].x == player_x) || (enemy_bullets[k].x == player_x - 1)) && enemy_bullets[k].y == player_y)) {
+	        enemy_bullets[k].active = 0;
 			live -= 1;
-	    } // si un des tirs ennemis touche le joueur, la vie diminue de 1
-	    i++;
-	}
-	i = 0;
-	while (i < NUM_SCENERY) {
-	    if ((asteroids[i].x > -1) && ((asteroids[i].x == player_x) || (asteroids[i].x == player_x - 1)) && asteroids[i].y == player_y) {
-	        player_x = asteroids[i].x - 1;
-	    	} // Si l'asteroid touche le joueur, le joueur est emporté
-		if ((asteroids[i].x == enemies[i].x) && (asteroids[i].y == enemies[i].y))
-			asteroids[i].y += 1;
-	    i++;
-	}
+	    	} // si un des tirs ennemis touche le joueur, la vie diminue de 1
+	    k++;
+		}
+	i++;
+    }
+}
+
+void check_collisions_asteroid() {
+    int i = 0;
+    while (i < NUM_SCENERY) {
+        if ((asteroids[i].x > -1) && ((asteroids[i].x == player_x) || (asteroids[i].x == player_x - 1)) && asteroids[i].y == player_y) {
+            player_x = asteroids[i].x - 1;
+    	} // si le joueur rentre en colision avec un ennemi, le jeu s'arrete
+	int j = 0;
+	while (j < NUM_BULLETS) {
+	    if (bullets[j].active && (((bullets[j].x == asteroids[i].x) || (bullets[j].x == asteroids[i].x + 1)) && bullets[j].y == asteroids[i].y)) {
+	        asteroids[i].x = -1;
+	        bullets[j].active = 0;
+	    	} // si un des tirs du joueurs touche un ennemis, le score augmemte de 10
+	    j++;
+		}
+	i++;
+    }
 }
 
 void handle_input(int ch) {
@@ -93,6 +101,7 @@ void update_game() {
    	move_enemy_bullets(); //fait apparaitre les tirs enemies
 	move_asteroids();
     check_collisions();
+	check_collisions_asteroid();
 	if (live <= 0) game_over = 1;
 	else if (score >= 100) you_win = 1;
     // Faire apparaître un ennemi toutes les X itérations
