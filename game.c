@@ -47,8 +47,8 @@ void	replay() {
 	init_game();
 }
 
-void	check_player_pos(){
-	if (player_x < 0 || player_x > COLS || player_y < 0 || player_x > LINES)
+void	check_player_pos() {
+	if (player_x < 0)
 		game_over = 1;
 }
 
@@ -111,6 +111,7 @@ void update_game() {
 	move_asteroids();
     check_collisions();
 	check_collisions_asteroid();
+	check_player_pos();
 	if (live <= 0) game_over = 1;
 	else if (score >= 100) you_win = 1;
     // Faire apparaître un ennemi toutes les X itérations
@@ -133,4 +134,5 @@ void draw_game() {
 	mvprintw(0, 50, "Lives: %d", live); // fait apparaitre la vie en haut au milieu
 	mvprintw(0, 100, "Time: %02d:%02d:%02d", hours, minutes, sseconds);
 	mvprintw(0, 150, "Replayed: %d times", games); // Fait apparître le nombre de fois que le joueur a restart
+	mvprintw(0, 200, "Player position: x:%d y:%d", player_x, player_y); // Fait apparître le nombre de fois que le joueur a restart
 }
