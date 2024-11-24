@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enemy.h                                            :+:      :+:    :+:   */
+/*   scenery.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arocca <arocca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/23 14:00:32 by hadia             #+#    #+#             */
-/*   Updated: 2024/11/24 15:54:36 by arocca           ###   ########.fr       */
+/*   Created: 2024/11/24 16:02:40 by arocca            #+#    #+#             */
+/*   Updated: 2024/11/24 16:37:25 by arocca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENEMY_H
-#define ENEMY_H
+#ifndef SCENERY_H
+#define SCENERY_H
 
 #include <ncurses.h>
 #include <stdlib.h>
 #include "utils.h"
 
-//tableau de structure representant ennemis
+// Tableau de structure representant des obstacles
 typedef struct {
-    int x, y;
-} Enemy;
+	int x, y;
+	int traj;
+} Asteroid;
 
-extern Enemy enemies[NUM_ENEMIES];
+extern Asteroid asteroids[NUM_SCENERY];
 
-void init_enemies();
-void spawn_enemy();
-void move_enemies();
-void display_enemies();
+void init_asteroids();
+void spawn_asteroid();
+void move_asteroids();
+void display_asteroids();
 
-#endif // ENEMY_H
+#endif

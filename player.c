@@ -2,6 +2,11 @@
 
 int player_x = 100, player_y = 15; //position depart du joueur
 
+void	replace_player() {
+	player_x = 100;
+	player_y = 15;
+}
+
 void display_player() {
     mvaddch(player_y, player_x, 'H');
 }  //apparition du joueur a la position initial 

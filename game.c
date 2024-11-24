@@ -3,25 +3,55 @@
 int score = 0;
 int live = 3;
 int game_over = 0;
+int you_win = 0;
+int sec = 0;
+int games = 0;
 
 void init_game() {
     init_enemies();
+	init_asteroids();
     init_bullets();
 	init_enemy_bullets();
 	init_background();
+}
+
+void increase_time(int seconds) {
+	sec += seconds;
 }
 
 int is_game_over() {
     return game_over;
 }
 
+int	is_wone(){
+	return you_win;
+}
+
+void	replay() {
+	score = 0;
+	live = 3;
+	game_over = 0;
+	you_win = 0;
+	sec = 0;
+	games += 1;
+	replace_player();
+	init_game();
+}
+
+void	check_player_pos(){
+	if (player_x < 0 || player_x > COLS || player_y < 0 || player_x > LINES)
+		game_over = 1;
+}
+
 void check_collisions() {
     int i = 0;
+	int j = 0;
     while (i < NUM_ENEMIES) {
         if (enemies[i].x == player_x && enemies[i].y == player_y) {
-            live -= 1;
+            game_over = 1;
     	} // si le joueur rentre en colision avec un ennemi, le jeu s'arrete
-	int j = 0;
+	i++;
+    }
 	while (j < NUM_BULLETS) {
 	    if (bullets[j].active && (((bullets[j].x == enemies[i].x) || (bullets[j].x == enemies[i].x + 1)) && bullets[j].y == enemies[i].y)) {
 	        enemies[i].x = -1;
@@ -29,17 +59,25 @@ void check_collisions() {
 	        score += 10;
 	    	} // si un des tirs du joueurs touche un ennemis, le score augmemte de 10
 	    j++;
-		}
-	int k = 0;
-	while (k < NUM_ENEMY_BULLETS) {
-	    if (enemy_bullets[k].active && (((enemy_bullets[k].x == player_x) || (enemy_bullets[k].x == player_x - 1)) && enemy_bullets[k].y == player_y)) {
-	        enemy_bullets[k].active = 0;
+	}
+	i = 0;
+	while (i < NUM_ENEMY_BULLETS) {
+	    if (enemy_bullets[i].active && (((enemy_bullets[i].x == player_x) || (enemy_bullets[i].x == player_x - 1)) && enemy_bullets[i].y == player_y)) {
+	        enemy_bullets[i].active = 0;
+			enemy_bullets[i].x = -1;
 			live -= 1;
-	    	} // si un des tirs ennemis touche le joueur, la vie diminue de 1
-	    k++;
-		}
-	i++;
-    }
+	    } // si un des tirs ennemis touche le joueur, la vie diminue de 1
+	    i++;
+	}
+	i = 0;
+	while (i < NUM_SCENERY) {
+	    if ((asteroids[i].x > -1) && ((asteroids[i].x == player_x) || (asteroids[i].x == player_x - 1)) && asteroids[i].y == player_y) {
+	        player_x = asteroids[i].x - 1;
+	    	} // Si l'asteroid touche le joueur, le joueur est emporté
+		if ((asteroids[i].x == enemies[i].x) && (asteroids[i].y == enemies[i].y))
+			asteroids[i].y += 1;
+	    i++;
+	}
 }
 
 void handle_input(int ch) {
@@ -49,35 +87,32 @@ void handle_input(int ch) {
 
 void update_game() {
     static int spawn_counter = 0;
-	int gen = 0;
-
-	gen += 1;
-	if (gen % 5 == 0)
-	{
-		init_background();
-		gen = 0;
-	}
 
     move_bullets();
     move_enemies();
    	move_enemy_bullets(); //fait apparaitre les tirs enemies
+	move_asteroids();
     check_collisions();
 	if (live <= 0) game_over = 1;
-
+	else if (score >= 100) you_win = 1;
     // Faire apparaître un ennemi toutes les X itérations
     spawn_counter++;
     if (spawn_counter >= 20) { // limite le nombre d'apparition d'ennemis a 20
         spawn_enemy();
+		spawn_asteroid();
         spawn_counter = 0;
     }
 }
 
-
 void draw_game() {
+	display_background();
     display_player();
     display_bullets();
     display_enemies(); //fait apparaitre le joueur, les ennemis, et les tirs a leur position initial
 	display_enemy_bullets(); //fait apparaitre les tirs enemis
+	display_asteroids();
     mvprintw(0, 0, "Score: %d", score); // fait apparaitre le score en haut de l'ecran
 	mvprintw(0, 50, "Lives: %d", live); // fait apparaitre la vie en haut au milieu
+	mvprintw(0, 100, "Time: %d", sec); // Fait apparître le temps depuis le début de la partie en secondes
+	mvprintw(0, 150, "Replayed: %d times", games); // Fait apparître le nombre de fois que le joueur a restart
 }

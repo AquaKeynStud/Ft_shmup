@@ -7,6 +7,7 @@ extern int player_x, player_y;
 
 void display_player();
 void move_player(int ch);
+void replace_player();
 
 #endif // PLAYER_H
 

@@ -19,6 +19,7 @@ void spawn_enemy() {
         if (enemies[i].x == -1) { // Cherche un emplacement inactif
             enemies[i].x = COLS - 1; //apparition a l'extremite droite
             enemies[i].y = rand() % LINES; //position aleatoire sur y
+			enemies[i].y += (enemies[i].y == 0);
             break;
         }
         i++;
@@ -29,7 +30,7 @@ void move_enemies() {
     int i = 0;
     while (i < NUM_ENEMIES) {
         if (enemies[i].x >= 0) {
-            enemies[i].x--; //deplce ennemi petit a petit
+            enemies[i].x--; //deplace ennemi petit a petit
             if (enemies[i].x < 0) { // Ennemi sorti de l'écran
                 enemies[i].x = -1; // Désactiver l'ennemi
             }

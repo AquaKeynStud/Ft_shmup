@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enemy.h                                            :+:      :+:    :+:   */
+/*   background.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arocca <arocca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/23 14:00:32 by hadia             #+#    #+#             */
-/*   Updated: 2024/11/24 15:54:36 by arocca           ###   ########.fr       */
+/*   Created: 2024/11/24 17:08:59 by arocca            #+#    #+#             */
+/*   Updated: 2024/11/24 17:20:35 by arocca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENEMY_H
-#define ENEMY_H
+#ifndef BACKGROUND_H
+#define BACKGROUND_H
 
 #include <ncurses.h>
 #include <stdlib.h>
 #include "utils.h"
 
-//tableau de structure representant ennemis
+// Tableau de structure representant des obstacles
 typedef struct {
-    int x, y;
-} Enemy;
+	int x, y;
+} star;
 
-extern Enemy enemies[NUM_ENEMIES];
+extern star stars[NUM_STARS];
 
-void init_enemies();
-void spawn_enemy();
-void move_enemies();
-void display_enemies();
+void init_background();
+void display_background();
+void move_background();
 
-#endif // ENEMY_H
+#endif

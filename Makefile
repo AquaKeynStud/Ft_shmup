@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -lncurses
-SRC = main.c player.c bullet.c enemy.c  game.c enemy_bullets.c decors.c
+SRC = main.c player.c bullet.c enemy.c  game.c enemy_bullets.c background.c menu.c scenery.c
 HEADERS = headers/
 OBJ_D = obj
 DEP_D = dep
@@ -12,8 +12,8 @@ $(shell mkdir -p $(OBJ_D) $(DEP_D))
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS)
+$(NAME): $(OBJ) $(DEP)
+	$(CC) -o $@ $^ $(CFLAGS) $(DEP)
 	@echo "\e[0;32mExecutable created successfully ! 🧬\e[0m"
 
 -include $(DEP)
