@@ -66,7 +66,7 @@ int main() {
 			ticks += 1;
 			move_background();
             refresh();
-            napms(100);
+            napms(50);
 			if ((ticks % 10) == 0)
 				increase_time(1);
         }
